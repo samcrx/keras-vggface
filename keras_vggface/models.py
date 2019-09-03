@@ -9,18 +9,18 @@
 '''
 
 
-from keras.layers import Flatten, Dense, Input, GlobalAveragePooling2D, \
+from tensorflow.keras.layers import Flatten, Dense, Input, GlobalAveragePooling2D, \
     GlobalMaxPooling2D, Activation, Conv2D, MaxPooling2D, BatchNormalization, \
     AveragePooling2D, Reshape, Permute, multiply
 from keras_applications.imagenet_utils import _obtain_input_shape
-from keras.utils import layer_utils
-from keras.utils.data_utils import get_file
-from keras import backend as K
-from keras_vggface import utils
-from keras.engine.topology import get_source_inputs
+from tensorflow.python.keras.utils import layer_utils
+from tensorflow.keras.utils import get_file
+from tensorflow.keras import backend as K
+import vggface_utils
+from tensorflow.keras.utils import get_source_inputs
 import warnings
-from keras.models import Model
-from keras import layers
+from tensorflow.keras.models import Model
+from tensorflow.keras import layers
 
 
 def VGG16(include_top=True, weights='vggface',
@@ -107,13 +107,13 @@ def VGG16(include_top=True, weights='vggface',
     if weights == 'vggface':
         if include_top:
             weights_path = get_file('rcmalli_vggface_tf_vgg16.h5',
-                                    utils.
+                                    vggface_utils.
                                     VGG16_WEIGHTS_PATH,
-                                    cache_subdir=utils.VGGFACE_DIR)
+                                    cache_subdir=vggface_utils.VGGFACE_DIR)
         else:
             weights_path = get_file('rcmalli_vggface_tf_notop_vgg16.h5',
-                                    utils.VGG16_WEIGHTS_PATH_NO_TOP,
-                                    cache_subdir=utils.VGGFACE_DIR)
+                                    vggface_utils.VGG16_WEIGHTS_PATH_NO_TOP,
+                                    cache_subdir=vggface_utils.VGGFACE_DIR)
         model.load_weights(weights_path, by_name=True)
         if K.backend() == 'theano':
             layer_utils.convert_all_kernels_in_model(model)
@@ -278,12 +278,12 @@ def RESNET50(include_top=True, weights='vggface',
     if weights == 'vggface':
         if include_top:
             weights_path = get_file('rcmalli_vggface_tf_resnet50.h5',
-                                    utils.RESNET50_WEIGHTS_PATH,
-                                    cache_subdir=utils.VGGFACE_DIR)
+                                    vggface_utils.RESNET50_WEIGHTS_PATH,
+                                    cache_subdir=vggface_utils.VGGFACE_DIR)
         else:
             weights_path = get_file('rcmalli_vggface_tf_notop_resnet50.h5',
-                                    utils.RESNET50_WEIGHTS_PATH_NO_TOP,
-                                    cache_subdir=utils.VGGFACE_DIR)
+                                    vggface_utils.RESNET50_WEIGHTS_PATH_NO_TOP,
+                                    cache_subdir=vggface_utils.VGGFACE_DIR)
         model.load_weights(weights_path)
         if K.backend() == 'theano':
             layer_utils.convert_all_kernels_in_model(model)
@@ -485,12 +485,12 @@ def SENET50(include_top=True, weights='vggface',
     if weights == 'vggface':
         if include_top:
             weights_path = get_file('rcmalli_vggface_tf_senet50.h5',
-                                    utils.SENET50_WEIGHTS_PATH,
-                                    cache_subdir=utils.VGGFACE_DIR)
+                                    vggface_utils.SENET50_WEIGHTS_PATH,
+                                    cache_subdir=vggface_utils.VGGFACE_DIR)
         else:
             weights_path = get_file('rcmalli_vggface_tf_notop_senet50.h5',
-                                    utils.SENET50_WEIGHTS_PATH_NO_TOP,
-                                    cache_subdir=utils.VGGFACE_DIR)
+                                    vggface_utils.SENET50_WEIGHTS_PATH_NO_TOP,
+                                    cache_subdir=vggface_utils.VGGFACE_DIR)
         model.load_weights(weights_path)
         if K.backend() == 'theano':
             layer_utils.convert_all_kernels_in_model(model)

@@ -1,8 +1,8 @@
 import numpy as np
-from keras_vggface import VGGFace
-from keras.preprocessing import image
+from tensorflow.keras_vggface import VGGFace
+from tensorflow.keras.preprocessing import image
 from keras_vggface import utils
-import keras
+import tensorflow.keras
 import unittest
 
 
@@ -11,7 +11,7 @@ class VGGFaceTests(unittest.TestCase):
 
 
     def testVGG16(self):
-        keras.backend.set_image_dim_ordering('tf')
+        tensorflow.keras.backend.set_image_dim_ordering('tf')
         model = VGGFace(model='vgg16')
         img = image.load_img('image/ajb.jpg', target_size=(224, 224))
         x = image.img_to_array(img)
@@ -25,7 +25,7 @@ class VGGFaceTests(unittest.TestCase):
         self.assertAlmostEqual(utils.decode_predictions(preds)[0][0][1], 0.9790116,places=3)
 
     def testRESNET50(self):
-        keras.backend.set_image_dim_ordering('tf')
+        tensorflow.keras.backend.set_image_dim_ordering('tf')
         model = VGGFace(model='resnet50')
         img = image.load_img('image/ajb.jpg', target_size=(224, 224))
         x = image.img_to_array(img)
@@ -40,7 +40,7 @@ class VGGFaceTests(unittest.TestCase):
 
 
     def testSENET50(self):
-        keras.backend.set_image_dim_ordering('tf')
+        tensorflow.keras.backend.set_image_dim_ordering('tf')
         model = VGGFace(model='senet50')
         img = image.load_img('image/ajb.jpg', target_size=(224, 224))
         x = image.img_to_array(img)
